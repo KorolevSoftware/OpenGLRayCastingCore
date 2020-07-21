@@ -103,7 +103,7 @@ int main(int ArgCount, char** Args)
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	// SDL window and Opengl
-	SDLWindowPtr window(SDL_CreateWindow("OpenGL Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WinWidth, WinHeight, SDL_WINDOW_OPENGL));
+	SDLWindowPtr window(SDL_CreateWindow("OpenGL ray casting", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WinWidth, WinHeight, SDL_WINDOW_OPENGL));
 	if (!window) {
 		std::cerr << "Failed create window" << std::endl;
 		return -1;
