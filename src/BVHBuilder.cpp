@@ -5,16 +5,6 @@
 #include "BVHBuilder.h"
 using glm::vec3;
 
-vec3 minVecComponent(vec3 const& a, vec3 const& b)
-{
-	return { std::min(a.x, b.x), std::min(a.y, b.y), std::min(a.z, b.z) };
-}
-
-vec3 maxVecComponent(vec3 const& a, vec3 const& b)
-{
-	return { std::max(a.x, b.x), std::max(a.y, b.y), std::max(a.z, b.z) };
-}
-
 struct AABB
 {
 private:
@@ -33,8 +23,8 @@ public:
 
 	void surrounding(AABB const& aabb)
 	{
-		min = minVecComponent(min, aabb.min);
-		max = maxVecComponent(max, aabb.max);
+		min = glm::min(min, aabb.min);
+		max = glm::max(max, aabb.max);
 	}
 
 	bool rayIntersect(vec3& origin, vec3& direction, float& mint)
@@ -146,8 +136,8 @@ private:
 	AABB genAABB()
 	{
 		return AABB(
-			minVecComponent(minVecComponent(vertex1, vertex2), vertex3),
-			maxVecComponent(maxVecComponent(vertex1, vertex2), vertex3));
+			glm::min(glm::min(vertex1, vertex2), vertex3),
+			glm::max(glm::max(vertex1, vertex2), vertex3));
 	}
 };
 
@@ -230,8 +220,8 @@ void BVHBuilder::buildRecurcive(int nodeIndex, std::vector<Triangle> const& vecT
 
 	for (Triangle const& tri : vecTriangle)
 	{
-		maxVec = maxVecComponent(tri.getCenter(), maxVec);
-		minVec = minVecComponent(tri.getCenter(), minVec);
+		maxVec = glm::max(tri.getCenter(), maxVec);
+		minVec = glm::min(tri.getCenter(), minVec);
 		centerSum += tri.getCenter();
 	}
 	vec3 midPoint = centerSum / (float)vecTriangle.size();
