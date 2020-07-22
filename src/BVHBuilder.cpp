@@ -201,6 +201,8 @@ std::vector<Node> BVHBuilder::getNodes()
 	return nodeList;
 }
 
+
+
 void BVHBuilder::buildRecurcive(int nodeIndex, std::vector<Triangle> const& vecTriangle)
 {
 	//Build Bpun box for triangles in vecTriangle
@@ -230,9 +232,7 @@ void BVHBuilder::buildRecurcive(int nodeIndex, std::vector<Triangle> const& vecT
 	{
 		maxVec = maxVecComponent(tri.getCenter(), maxVec);
 		minVec = minVecComponent(tri.getCenter(), minVec);
-
 		centerSum += tri.getCenter();
-
 	}
 	vec3 midPoint = centerSum / (float)vecTriangle.size();
 	vec3 len = glm::abs(maxVec - minVec);
@@ -261,14 +261,16 @@ void BVHBuilder::buildRecurcive(int nodeIndex, std::vector<Triangle> const& vecT
 		assert(tempRightTriangleList.size());
 	};
 
+	using namespace std::placeholders;
+
 	if (axis == 0)
-		splitByAxis([](vec3 const& vec) { return vec.x; });
+		splitByAxis(bind(&vec3::x, _1));
 
 	if (axis == 1)
-		splitByAxis([](vec3 const& vec) { return vec.y; });
+		splitByAxis(bind(&vec3::y, _1));
 
 	if (axis == 2)
-		splitByAxis([](vec3 const& vec) { return vec.z; });
+		splitByAxis(bind(&vec3::z, _1));
 
 	if (tempLeftTriangleList.size() == 1)
 	{
