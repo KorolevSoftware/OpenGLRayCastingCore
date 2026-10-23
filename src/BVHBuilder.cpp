@@ -251,16 +251,14 @@ void BVHBuilder::buildRecurcive(int nodeIndex, std::vector<Triangle> const& vecT
 		assert(tempRightTriangleList.size());
 	};
 
-	using namespace std::placeholders;
-
 	if (axis == 0)
-		splitByAxis(bind(&vec3::x, _1));
+		splitByAxis([](vec3 const& point) { return point.x; });
 
 	if (axis == 1)
-		splitByAxis(bind(&vec3::y, _1));
+		splitByAxis([](vec3 const& point) { return point.y; });
 
 	if (axis == 2)
-		splitByAxis(bind(&vec3::z, _1));
+		splitByAxis([](vec3 const& point) { return point.z; });
 
 	if (tempLeftTriangleList.size() == 1)
 	{
