@@ -9,11 +9,12 @@ TextureGL::TextureGL(int width, int height, TextureGLType datatype, const void* 
 		VertexDataXYZToTexture(width, height, data);
 }
 
-TextureGL::TextureGL(TextureGL&& other)
+TextureGL::TextureGL(TextureGL&& other) :
+	textureID(other.textureID),
+	width(other.width),
+	height(other.height)
 {
-	other.textureID = this->textureID;
-	other.width = this->width;
-	other.height = this->height;
+	other.textureID = 0; // glDeleteTextures(0) в деструкторе безопасен
 }
 
 int TextureGL::getWidth()
