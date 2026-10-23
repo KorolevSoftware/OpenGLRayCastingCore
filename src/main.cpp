@@ -1,6 +1,6 @@
 #include <assert.h>
-#include <gtc/matrix_transform.hpp>
-#include <fwd.hpp> //GLM
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/fwd.hpp> //GLM
 #include <iostream>
 #include <map>
 #include "Utils.h"

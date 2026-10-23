@@ -2,7 +2,7 @@
 #include <array>
 #include <iostream>
 #include <tuple>
-#include <glm.hpp>
+#include <glm/glm.hpp>
 #include "glad.h" // Opengl function
 #include "Utils.h"
 #include "ShaderProgram.h"

@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include <fwd.hpp> //GLM
+#include <glm/fwd.hpp> //GLM
 #include <functional>
 
 struct Triangle;

@@ -1,2 +1,5 @@
 # Visual studio project
 /bin
+
+# CMake
+/build
